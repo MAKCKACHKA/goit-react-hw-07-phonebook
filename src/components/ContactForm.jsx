@@ -1,24 +1,33 @@
 import { Form, Button, Group, Label, Input } from './Styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeName, changeNumber } from 'redux/contacts/createContact';
-import { nanoid } from 'nanoid';
-import { addContact } from 'redux/contacts/contactsSlice';
+
+import {
+  selectContacts,
+  selectName,
+  selectNumber,
+} from 'redux/contacts/selesctors';
+import { addContact } from 'redux/operations';
 
 const ContactForm = () => {
-  const { contacts } = useSelector(state => state.contacts);
+  // const { contacts } = useSelector(state => state.contacts);
+  const contacts = useSelector(selectContacts);
+  // const { name, number } = useSelector(state => state.contactInfo);
+  const name = useSelector(selectName);
+  const number = useSelector(selectNumber);
 
-  const { name, number } = useSelector(state => state.contactInfo);
   const dispatch = useDispatch();
   const nam = value => dispatch(changeName(value));
   const num = value => dispatch(changeNumber(value));
 
   const createContact = data => {
     const newContact = {
-      id: nanoid(),
+      // createdAt: new Date(),
+      // id: nanoid(),
       ...data,
     };
     console.log(newContact);
-    dispatch(addContact(newContact));
+    dispatch(addContact({ ...data }));
   };
 
   const handleChange = ({ target }) => {

@@ -10,9 +10,7 @@ import {
 import { addContact } from 'redux/operations';
 
 const ContactForm = () => {
-  // const { contacts } = useSelector(state => state.contacts);
   const contacts = useSelector(selectContacts);
-  // const { name, number } = useSelector(state => state.contactInfo);
   const name = useSelector(selectName);
   const number = useSelector(selectNumber);
 
@@ -22,12 +20,9 @@ const ContactForm = () => {
 
   const createContact = data => {
     const newContact = {
-      // createdAt: new Date(),
-      // id: nanoid(),
       ...data,
     };
-    console.log(newContact);
-    dispatch(addContact({ ...data }));
+    dispatch(addContact(newContact));
   };
 
   const handleChange = ({ target }) => {
@@ -43,7 +38,6 @@ const ContactForm = () => {
     if (contacts.some(contact => contact.name === name)) {
       alert(`${name} is already in contacts!`);
     } else {
-      console.log(name);
       createContact({
         name,
         number,

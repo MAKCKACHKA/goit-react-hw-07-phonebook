@@ -6,7 +6,6 @@ import { deleteContact } from 'redux/operations';
 import { selectError, selectIsLoading } from 'redux/contacts/selesctors';
 
 const ContactList = () => {
-  // const { contacts, filter } = useSelector(state => state.contacts);
   const contacts = useSelector(selectContacts);
   const filter = useSelector(selectFilter);
   const isLoading = useSelector(selectIsLoading);
@@ -18,7 +17,6 @@ const ContactList = () => {
     dispatch(deleteContact(id));
     dispatch(delContact(contacts.filter(contact => contact.id !== id)));
   };
-
   const filteredContacts = contacts.filter(contact =>
     contact.name.toLowerCase().includes(filter.toLowerCase())
   );
